@@ -13,7 +13,7 @@ typeset -U path PATH
 export PATH="/opt/homebrew/bin:$PATH"
 
 
-# ===========================================================
+# ============================================================
 # OH MY ZSH
 # ============================================================
 export ZSH="$HOME/.oh-my-zsh"
@@ -28,7 +28,7 @@ source $ZSH/oh-my-zsh.sh
 # PLUGINS
 # ============================================================
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 
 # ============================================================
