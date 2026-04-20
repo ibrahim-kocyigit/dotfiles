@@ -1,14 +1,14 @@
---> !! LEADER KEY (Must stay at top)
+'--> !! LEADER KEY (Must stay at top)
 vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.maplocalleader = '\\'
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 
---> SHARED OPTIONS
+'--> SHARED OPTIONS
 local opts = { noremap = true, silent = true }
 
 
---> TURKISH KEYBOARD REMAPS
+'--> TURKISH KEYBOARD REMAPS
 vim.keymap.set({ 'n', 'v', 'o', 'x' },           'ı', 'k') -- up
 vim.keymap.set({ 'n', 'v', 'o', 'x' },           'j', 'h') -- left
 vim.keymap.set({ 'n', 'v', 'o', 'x' },           'k', 'j') -- down
@@ -21,14 +21,14 @@ vim.keymap.set({ 'n', 'v', 'o', 'x', 'i', 'c' }, 'ö', '/') -- search forward
 vim.keymap.set({ 'n', 'v', 'o', 'x', 'i', 'c' }, 'ç', '#') -- search backward/comment
 
 
---> FILE OPERATIONS
+'--> FILE OPERATIONS
 vim.keymap.set('n', '<C-s>',      '<cmd>w<CR>',           opts) -- Save file
 vim.keymap.set('n', '<leader>sn', '<cmd>noautocmd w<CR>', opts) -- Save file without triggering autoformat
 vim.keymap.set('n', '<C-q>',      '<cmd>q<CR>',           opts) -- Quit window
 
 
---> EDITING
--- Delete character without overwriting the yank regiester
+'--> EDITING
+-- Delete character without overwriting the yank register
 vim.keymap.set('n', 'x', '"_x', opts)
 
 -- Stay in indent mode after shifting selection
@@ -42,7 +42,7 @@ vim.keymap.set('v', 'p', '"_dP', opts)
 vim.keymap.set('n', '<leader>lw', '<cmd>set wrap!<CR>', opts)
 
 
---> NAVIGATION
+'--> NAVIGATION
 -- Scroll and keep cursor centered
 vim.keymap.set('n', '<C-d>', '<C-d>zz', opts)
 vim.keymap.set('n', '<C-u>', '<C-u>zz', opts)
@@ -52,7 +52,7 @@ vim.keymap.set('n', 'n', 'nzzzv', opts)
 vim.keymap.set('n', 'N', 'Nzzzv', opts)
 
 
---> WINDOW MANAGEMENT
+'--> WINDOW MANAGEMENT
 vim.keymap.set('n', '<leader>v',  '<C-w>v',     opts) -- Split vertically
 vim.keymap.set('n', '<leader>h',  '<C-w>s',     opts) -- Split horizontally
 vim.keymap.set('n', '<leader>se', '<C-w>=',     opts) -- Equalise split dimensions
@@ -71,21 +71,21 @@ vim.keymap.set('n', '<Left>',  ':vertical resize -2<CR>', opts) -- Shrink vertic
 vim.keymap.set('n', '<Right>', ':vertical resize +2<CR>', opts) -- Grow vertically
 
 
---> BUFFER MANAGEMENT
+'--> BUFFER MANAGEMENT
 vim.keymap.set('n', '<Tab>',     ':bnext<CR>',    opts) -- Next buffer
 vim.keymap.set('n', '<S-Tab>',   ':bprevious<CR>', opts) -- Previous buffer
 vim.keymap.set('n', '<leader>x', ':bdelete!<CR>', opts) -- Force close buffer
 vim.keymap.set('n', '<leader>b', '<cmd>enew<CR>', opts) -- Open new empty buffer
 
 
---> TAB MANAGEMENT
+'--> TAB MANAGEMENT
 vim.keymap.set('n', '<leader>to', ':tabnew<CR>',   opts) -- Open new tab
 vim.keymap.set('n', '<leader>tx', ':tabclose<CR>', opts) -- Close current tab
 vim.keymap.set('n', '<leader>tn', ':tabn<CR>',     opts) -- Go to next tab
 vim.keymap.set('n', '<leader>tp', ':tabp<CR>',     opts) -- Go to previous tab
 
 
---> DIAGNOSTICS
+'--> DIAGNOSTICS
 vim.keymap.set('n', '[d', function()
   vim.diagnostic.jump { count = -1, float = true }
 end, { noremap = true, silent = true, desc = 'Jump to previous diagnostic' })
@@ -101,7 +101,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist,
   { noremap = true, silent = true, desc = 'Send diagnostics to location list' })
 
 
---> TERMINAL & EXECUTION (DATA SCIENCE / ML)
+'--> TERMINAL & EXECUTION (DATA SCIENCE / ML)
 -- Open a terminal in a horizontal split (useful for running scripts/REPLs)
 vim.keymap.set('n', '<leader>tt', '<cmd>split | terminal<CR>', opts)
 
