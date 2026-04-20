@@ -1,0 +1,38 @@
+# --- Window and Tabse --- #
+window-width = 80
+window-height = 40
+macos-titlebar-style = tabs
+# title = " "
+
+
+# --- Theme & Colors --- #
+theme = Atom One Dark
+background-opacity = 0.95
+background-blur-radius = 25
+# split-divider-color = #ff0000
+
+
+# --- Fonts --- #
+font-family = "JetBrains Mono"
+font-size = 16
+
+
+# --- Keyboard & Mouse --- #
+keybind = opt+j=goto_split:left
+keybind = opt+k=goto_split:down
+keybind = opt+ı=goto_split:up
+keybind = opt+l=goto_split:right
+
+mouse-hide-while-typing = true
+macos-option-as-alt = false
+
+
+
+# --- Cursor --- # 
+shell-integration-features = no-title
+shell-integration-features = no-cursor
+cursor-style = block
+cursor-style-blink = false
+
+
+
