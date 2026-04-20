@@ -130,13 +130,27 @@ return {
     -- - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
     -- - settings (table): Override the default settings passed when initializing the server.
     local servers = {
-      pyright = {},
+      -- basedpyright: community fork of pyright with better DS/ML type inference.
+      -- autoSearchPaths + useLibraryCodeForTypes ensure it finds venv packages (numpy, pandas, torch, etc.)
+      -- diagnosticMode = 'openFilesOnly' keeps it fast and non-noisy in large projects.
+      basedpyright = {
+        settings = {
+          python = {
+            analysis = {
+              autoSearchPaths = true,
+              useLibraryCodeForTypes = true,
+              diagnosticMode = 'openFilesOnly',
+            },
+          },
+        },
+      },
       ruff = {},
       dockerls = {},
       sqlls = {},
       terraformls = {},
       jsonls = {},
       yamlls = {},
+      marksman = {}, -- Markdown LSP: link completion, document symbols, cross-file references
       lua_ls = {
         settings = {
           Lua = {
