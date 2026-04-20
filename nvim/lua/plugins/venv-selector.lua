@@ -24,7 +24,7 @@ return {
     },
   },
   keys = {
-    { '<leader>vs', '<cmd>VenvSelect<CR>',       desc = 'Select Python venv' },
-    { '<leader>vc', '<cmd>VenvSelectCached<CR>', desc = 'Select cached Python venv' },
+    { '<leader>pv', '<cmd>VenvSelect<CR>',       desc = 'Select Python venv' },
+    { '<leader>pc', '<cmd>VenvSelectCached<CR>', desc = 'Select cached Python venv' },
   },
 }
