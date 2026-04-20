@@ -79,3 +79,11 @@ vim.opt.shortmess:append 'c'                         -- Suppress completion menu
 vim.opt.iskeyword:append '-'                         -- Treat hyphenated words as a single keyword in searches
 vim.opt.formatoptions:remove { 'c', 'r', 'o' }       -- Disable automatic comment leader insertion on new lines
 vim.opt.runtimepath:remove '/usr/share/vim/vimfiles' -- Exclude Vim's runtime path to isolate Neovim plugins
+
+--> PYTHON PROVIDER
+-- Points Neovim to a dedicated Python venv that has pynvim and jupyter_client installed.
+-- This is separate from your project venvs — it is Neovim's internal Python provider,
+-- used by plugins like molten.nvim to communicate with Python/Jupyter kernels.
+-- Switch project venvs independently with <leader>pv (venv-selector).
+-- Setup: uv venv ~/.venv/neovim && uv pip install --python ~/.venv/neovim/bin/python pynvim jupyter_client cairosvg plotly kaleido
+vim.g.python3_host_prog = vim.fn.expand '~/.venv/neovim/bin/python'
