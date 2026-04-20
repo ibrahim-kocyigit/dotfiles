@@ -1,11 +1,11 @@
---> LINE NUMBERS & CURSOR
+'--> LINE NUMBERS & CURSOR
 vim.wo.number = true        -- Show absolute line numbers (false)
 vim.o.relativenumber = true -- Show relative line numbers (false)
 vim.o.numberwidth = 4       -- Width of the line number column (4)
 vim.o.cursorline = false    -- Do not highlight the current line (false)
 vim.wo.signcolumn = 'yes'   -- Always show the sign column ('auto')
 
---> INDENTATION & TABS
+'--> INDENTATION & TABS
 vim.o.autoindent = true     -- Inherit indentation from the current line (true)
 vim.o.smartindent = true    -- Insert indentation based on code syntax (false)
 vim.o.breakindent = true    -- Wrapped lines continue at the same indentation level (false)
@@ -67,7 +67,7 @@ vim.o.completeopt = 'menuone,noselect'  -- Show completion menu without auto-sel
 
 --> SPELL CHECKING PER FILETYPE
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'markdown', 'rst' },
+  pattern = { 'markdown', 'rst', 'gitcommit' },
   callback = function()
     vim.opt_local.spell = true
     vim.opt_local.spelllang = 'en_us'
