@@ -4,8 +4,8 @@ return {
     local mode = {
       'mode',
       fmt = function(str)
-        return ' ' .. str
-        -- return ' ' .. str:sub(1, 1) -- displays only the first character of the mode
+        return ' ' .. str
+        -- return ' ' .. str:sub(1, 1) -- displays only the first character of the mode
       end,
     }
 
@@ -23,7 +23,7 @@ return {
       'diagnostics',
       sources = { 'nvim_diagnostic' },
       sections = { 'error', 'warn' },
-      symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
+      symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
       colored = false,
       update_in_insert = false,
       always_visible = false,
@@ -33,19 +33,27 @@ return {
     local diff = {
       'diff',
       colored = false,
-      symbols = { added = ' ', modified = ' ', removed = ' ' }, -- changes diff symbols
+      symbols = { added = ' ', modified = ' ', removed = ' ' }, -- changes diff symbols
+      cond = hide_in_width,
+    }
+
+    local venv = {
+      function()
+        local venv = os.getenv 'VIRTUAL_ENV' or os.getenv 'CONDA_DEFAULT_ENV'
+        if venv then
+          return '(' .. vim.fn.fnamemodify(venv, ':t') .. ')'
+        end
+        return ''
+      end,
       cond = hide_in_width,
     }
 
     require('lualine').setup {
       options = {
         icons_enabled = true,
-        theme = 'nord', -- Set theme based on environment variable
-        -- Some useful glyphs:
-        -- https://www.nerdfonts.com/cheat-sheet
-        --        
-        section_separators = { left = '', right = '' },
-        component_separators = { left = '', right = '' },
+        theme = 'nord',
+        section_separators = { left = '', right = '' },
+        component_separators = { left = '', right = '' },
         disabled_filetypes = { 'alpha', 'neo-tree' },
         always_divide_middle = true,
       },
@@ -53,7 +61,7 @@ return {
         lualine_a = { mode },
         lualine_b = { 'branch' },
         lualine_c = { filename },
-        lualine_x = { diagnostics, diff, { 'encoding', cond = hide_in_width }, { 'filetype', cond = hide_in_width } },
+        lualine_x = { diagnostics, diff, venv, { 'encoding', cond = hide_in_width }, { 'filetype', cond = hide_in_width } },
         lualine_y = { 'location' },
         lualine_z = { 'progress' },
       },
