@@ -1,6 +1,7 @@
-# --- Window and Tabse --- #
+# --- Window and Tabs --- #
 window-width = 80
 window-height = 40
+window-save-state = never
 macos-titlebar-style = tabs
 # title = " "
 
@@ -29,10 +30,6 @@ macos-option-as-alt = false
 
 
 # --- Cursor --- # 
-shell-integration-features = no-title
-shell-integration-features = no-cursor
+shell-integration-features = no-title,no-cursor
 cursor-style = block
 cursor-style-blink = false
-
-
-
