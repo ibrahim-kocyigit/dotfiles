@@ -17,6 +17,7 @@ require('lazy').setup ({
   require('plugins.colorthemes.onedark'),
   require('plugins.which-key'),
   require('plugins.neotree'),
+  require('plugins.terminal') -- toggleterm
   --  require('plugins.bufferline'),
   --  require('plugins.lualine'),
   --  require('plugins.treesitter'),

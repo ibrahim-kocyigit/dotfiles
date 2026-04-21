@@ -29,6 +29,7 @@ return {
 
         -- [T]erminal module
         { "<leader>T", group = "[T]erminal" },
+{ "<leader>Tt", desc = "[t]oggle" },
         { "<leader>To", group = "[o]pen" },
         { "<leader>Tp", group = "[p]ython" },
 
@@ -41,6 +42,9 @@ return {
         { "<leader>u", group = "[u]i" },
         { "<leader>ut", group = "[t]oggle" },
         { "<leader>uc", group = "[c]lear" },
+
+
+  { "<leader>e", group = "[e]xplorer" },
     })
   end,
 }

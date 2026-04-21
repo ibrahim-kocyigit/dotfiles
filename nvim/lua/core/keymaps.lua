@@ -161,28 +161,6 @@ vim.keymap.set('n', '<Left>', '<cmd>vertical resize -2<CR>', opts)
 vim.keymap.set('n', '<Right>', '<cmd>vertical resize +2<CR>', opts)
 
 
-------------------- [T]erminal ---------------------
-
--- [o]pen...
----- [v]ertical split
-vim.keymap.set('n', '<leader>Tov', '<cmd>vsplit | terminal<CR>', 
-    vim.tbl_extend('force', opts, { desc = '[v]ertical' }))
----- [h]orizontal split
-vim.keymap.set('n', '<leader>Toh', '<cmd>split | terminal<CR>', 
-    vim.tbl_extend('force', opts, { desc = '[h]orizontal' }))
-
--- [p]ython...
----- [v]ertical split
-vim.keymap.set('n', '<leader>Tpv', '<cmd>vsplit | terminal python3 %; read -k 1<CR>', 
-    vim.tbl_extend('force', opts, { desc = '[v]ertical' }))
----- [h]orizontal split
-vim.keymap.set('n', '<leader>Tph', '<cmd>split | terminal python3 %; read -k 1<CR>', 
-    vim.tbl_extend('force', opts, { desc = '[h]orizontal' }))
-
--- Use Esc to exit terminal mode
-vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], opts)
-
-
 ------------------- [d]iagnostic -------------------
 
 -- [g]o..
