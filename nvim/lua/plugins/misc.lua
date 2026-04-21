@@ -1,5 +1,14 @@
 -- Standalone plugins with less than 10 lines of config go here
 return {
+
+  {
+    -- Hints keybinds
+    'folke/which-key.nvim',
+  },
+
+
+--[[
+
   {
     -- Tmux & split window navigation
     'christoomey/vim-tmux-navigator',
@@ -15,10 +24,6 @@ return {
   {
     -- GitHub integration for vim-fugitive
     'tpope/vim-rhubarb',
-  },
-  {
-    -- Hints keybinds
-    'folke/which-key.nvim',
   },
   {
     -- Autoclose parentheses, brackets, quotes, etc.
@@ -55,4 +60,7 @@ return {
       { '<leader>xq', '<cmd>Trouble qflist toggle<cr>',                             desc = 'Quickfix List (Trouble)' },
     },
   },
+
+--]]
+
 }
