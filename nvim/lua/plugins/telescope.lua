@@ -1,6 +1,5 @@
 return {
   'nvim-telescope/telescope.nvim',
-  branch = 'master',
   dependencies = {
     'nvim-lua/plenary.nvim',
     {
@@ -83,7 +82,7 @@ return {
     vim.keymap.set('n', '<leader>ssd', builtin.diagnostics, vim.tbl_extend('force', opts, { desc = '[d]iagnostics' }))
 
     -- [s]earch [l]sp...
-    vim.keymap.set('n', '<leader>sls', builtin.lsp_document_symbols, vim.tbl_extend('force', opts, { desc = '[s]ymbols' }))
+    -- vim.keymap.set('n', '<leader>sls', builtin.lsp_document_symbols, vim.tbl_extend('force', opts, { desc = '[s]ymbols' }))
 
     -- --- [g]it Module ---
     -- [g]it [s]earch...

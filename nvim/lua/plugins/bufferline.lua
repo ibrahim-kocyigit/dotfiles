@@ -1,44 +1,42 @@
 return {
   'akinsho/bufferline.nvim',
   dependencies = {
-    'moll/vim-bbye',
-    'nvim-tree/nvim-web-devicons',
+    'nvim-tree/nvim-web-devicons',  -- vim-bbye dropped
   },
   config = function()
     require('bufferline').setup {
       options = {
-        mode = 'buffers', -- set to "tabs" to only show tabpages instead
-        themable = true, -- allows highlight groups to be overriden i.e. sets highlights as default
-        numbers = 'none', -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
-        close_command = 'Bdelete! %d', -- can be a string | function, see "Mouse actions"
+        mode = 'buffers',
+        themable = true,
+        numbers = 'none',
+        close_command = 'bdelete! %d',          -- native, no vim-bbye needed
         buffer_close_icon = '✗',
         close_icon = '✗',
-        path_components = 1, -- Show only the file name without the directory
+        path_components = 1,
         modified_icon = '●',
-        left_trunc_marker = '',
-        right_trunc_marker = '',
-        max_name_length = 30,
-        max_prefix_length = 30, -- prefix used when a buffer is de-duplicated
+        left_trunc_marker = '',
+        right_trunc_marker = '',
+        max_name_length = 20,
+        max_prefix_length = 20,
         tab_size = 21,
+        enforce_regular_tabs = false,           -- allow tab_size to take effect
         diagnostics = false,
         diagnostics_update_in_insert = false,
         color_icons = true,
         show_buffer_icons = true,
         show_buffer_close_icons = true,
         show_close_icon = true,
-        persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
-        separator_style = { '│', '│' }, -- | "thick" | "thin" | { 'any', 'any' },
-        enforce_regular_tabs = true,
+        persist_buffer_sort = true,
+        separator_style = { '│', '│' },
         always_show_bufferline = true,
         show_tab_indicators = false,
         indicator = {
-          -- icon = '▎', -- this should be omitted if indicator style is not 'icon'
-          style = 'none', -- Options: 'icon', 'underline', 'none'
+          style = 'none',
         },
         icon_pinned = '󰐃',
         minimum_padding = 1,
         maximum_padding = 5,
-        maximum_length = 15,
+        maximum_length = 25,                    -- consistent with max_name_length
         sort_by = 'insert_at_end',
       },
       highlights = {
@@ -49,12 +47,20 @@ return {
           bold = true,
           italic = false,
         },
-        -- separator_selected = {},
-        -- tab_selected = {},
-        -- background = {},
-        -- indicator_selected = {},
-        -- fill = {},
       },
     }
+
+    -- CO-LOCATED KEYMAPS (Module-Action-Option)
+    local opts = { noremap = true, silent = true }
+
+    -- [b]uffer [g]o - use bufferline cycle to respect visual order
+    vim.keymap.set('n', '<leader>bgn', '<cmd>BufferLineCycleNext<CR>',
+        vim.tbl_extend('force', opts, { desc = '[n]ext' }))
+    vim.keymap.set('n', '<leader>bgp', '<cmd>BufferLineCyclePrev<CR>',
+        vim.tbl_extend('force', opts, { desc = '[p]revious' }))
+
+    -- [b]uffer [p]in
+    vim.keymap.set('n', '<leader>bpt', '<cmd>BufferLineTogglePin<CR>',
+        vim.tbl_extend('force', opts, { desc = '[t]oggle' }))
   end,
 }

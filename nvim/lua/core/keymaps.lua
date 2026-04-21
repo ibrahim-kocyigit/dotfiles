@@ -32,6 +32,7 @@ vim.keymap.set('n', '<C-q>', '<cmd>confirm q<CR>', opts)
 -- In Insert mode: Save and quit
 vim.keymap.set('i', '<C-q>', '<Esc><cmd>confirm q<CR>', opts)
 
+
 ----------------------------------------------------
 -------------------- NAVIGATION --------------------
 ----------------------------------------------------
@@ -66,9 +67,6 @@ vim.keymap.set('v', '>', '>gv', opts)
 
 -- Paste over selection without overwriting the yank register
 vim.keymap.set('v', 'p', '"_dP', opts)
-
--- Toggle line wrapping
-vim.keymap.set('n', '<leader>lw', '<cmd>set wrap!<CR>', opts)
 
 
 ----------------------------------------------------
@@ -169,29 +167,6 @@ vim.keymap.set('n', '<Up>', '<cmd>resize -2<CR>', opts)
 vim.keymap.set('n', '<Down>', '<cmd>resize +2<CR>', opts)
 vim.keymap.set('n', '<Left>', '<cmd>vertical resize -2<CR>', opts)
 vim.keymap.set('n', '<Right>', '<cmd>vertical resize +2<CR>', opts)
-
-
-------------------- [d]iagnostic -------------------
-
--- [g]o..
----- [n]ext diagnostic
-vim.keymap.set('n', '<leader>dgn', function()
-  vim.diagnostic.jump { count = 1, float = true }
-end, vim.tbl_extend('force', opts, { desc = '[n]ext' }))
-
----- [p]revious diagnostic
-vim.keymap.set('n', '<leader>dgp', function()
-  vim.diagnostic.jump { count = -1, float = true }
-end, vim.tbl_extend('force', opts, { desc = '[p]revious' }))
-
--- [s]how...
----- [f]loating window
-vim.keymap.set('n', '<leader>dsf', vim.diagnostic.open_float, 
-    vim.tbl_extend('force', opts, { desc = '[f]loating' }))
-
----- [l]ist all in file
-vim.keymap.set('n', '<leader>dsl', vim.diagnostic.setloclist, 
-    vim.tbl_extend('force', opts, { desc = '[l]ist' }))
 
 
 ------------------- [u]i ---------------------------

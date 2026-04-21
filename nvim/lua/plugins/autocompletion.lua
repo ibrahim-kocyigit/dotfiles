@@ -1,6 +1,16 @@
-return { -- Autocompletion
+return {
   'hrsh7th/nvim-cmp',
   dependencies = {
+    -- Lua development completions for Neovim config (vim.* APIs, etc.)
+    {
+      'folke/lazydev.nvim',
+      ft = 'lua',
+      opts = {
+        library = {
+          { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+        },
+      },
+    },
     {
       'L3MON4D3/LuaSnip',
       build = (function()
@@ -48,11 +58,11 @@ return { -- Autocompletion
       },
       completion = { completeopt = 'menu,menuone,noinsert' },
       mapping = cmp.mapping.preset.insert {
-        ['<C-n>'] = cmp.mapping.select_next_item(),
-        ['<C-p>'] = cmp.mapping.select_prev_item(),
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-y>'] = cmp.mapping.confirm { select = true },
+        ['<C-n>']     = cmp.mapping.select_next_item(),
+        ['<C-p>']     = cmp.mapping.select_prev_item(),
+        ['<C-b>']     = cmp.mapping.scroll_docs(-4),
+        ['<C-f>']     = cmp.mapping.scroll_docs(4),
+        ['<C-y>']     = cmp.mapping.confirm { select = true },
         ['<C-Space>'] = cmp.mapping.complete {},
         ['<C-l>'] = cmp.mapping(function()
           if luasnip.expand_or_locally_jumpable() then
@@ -84,7 +94,7 @@ return { -- Autocompletion
         end, { 'i', 's' }),
       },
       sources = {
-        { name = 'lazydev', group_index = 0 },
+        { name = 'lazydev',                group_index = 0 },
         { name = 'nvim_lsp' },
         { name = 'nvim_lsp_signature_help' },
         { name = 'luasnip' },
@@ -96,11 +106,11 @@ return { -- Autocompletion
         format = function(entry, vim_item)
           vim_item.kind = string.format('%s', kind_icons[vim_item.kind])
           vim_item.menu = ({
-            nvim_lsp = '[LSP]',
+            nvim_lsp                = '[LSP]',
             nvim_lsp_signature_help = '[Signature]',
-            luasnip = '[Snippet]',
-            buffer = '[Buffer]',
-            path = '[Path]',
+            luasnip                 = '[Snippet]',
+            buffer                  = '[Buffer]',
+            path                    = '[Path]',
           })[entry.source.name]
           return vim_item
         end,

@@ -1,32 +1,28 @@
 -- Standalone plugins with less than 10 lines of config go here
 return {
 
-
---[[
-
-  {
-    -- Tmux & split window navigation
-    'christoomey/vim-tmux-navigator',
-  },
-  {
-    -- Detect tabstop and shiftwidth automatically
-    'tpope/vim-sleuth',
-  },
   {
     -- Powerful Git integration for Vim
     'tpope/vim-fugitive',
   },
+
+  {
+    -- Detect tabstop and shiftwidth automatically
+    'tpope/vim-sleuth',
+  },
+
   {
     -- GitHub integration for vim-fugitive
     'tpope/vim-rhubarb',
   },
+
   {
-    -- Autoclose parentheses, brackets, quotes, etc.
-    'windwp/nvim-autopairs',
-    event = 'InsertEnter',
-    config = true,
-    opts = {},
+    'NvChad/nvim-colorizer.lua', -- maintained fork of norcalli/nvim-colorizer.lua
+    config = function()
+      require('colorizer').setup()
+    end,
   },
+
   {
     -- Highlight todo, notes, etc in comments
     'folke/todo-comments.nvim',
@@ -34,28 +30,29 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = { signs = false },
   },
+
   {
-    -- High-performance color highlighter
-    'norcalli/nvim-colorizer.lua',
+
+    -- Autoclose parentheses, brackets, quotes, etc.
+    'windwp/nvim-autopairs',
+    event = 'InsertEnter',
+    dependencies = { 'hrsh7th/nvim-cmp' },
     config = function()
-      require('colorizer').setup()
+      require('nvim-autopairs').setup {}
+      -- Insert closing pair on cmp <CR> confirm
+      local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+      local cmp = require 'cmp'
+      cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
     end,
   },
+
+  --[[
+
   {
-    -- Pretty diagnostics panel
-    'folke/trouble.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    opts = {},
-    keys = {
-      { '<leader>xx', '<cmd>Trouble diagnostics toggle<cr>',                        desc = 'Diagnostics (Trouble)' },
-      { '<leader>xX', '<cmd>Trouble diagnostics toggle filter.buf=0<cr>',           desc = 'Buffer Diagnostics (Trouble)' },
-      { '<leader>xs', '<cmd>Trouble symbols toggle focus=false<cr>',                desc = 'Symbols (Trouble)' },
-      { '<leader>xl', '<cmd>Trouble lsp toggle focus=false win.position=right<cr>', desc = 'LSP references (Trouble)' },
-      { '<leader>xL', '<cmd>Trouble loclist toggle<cr>',                            desc = 'Location List (Trouble)' },
-      { '<leader>xq', '<cmd>Trouble qflist toggle<cr>',                             desc = 'Quickfix List (Trouble)' },
-    },
+    -- Tmux & split window navigation
+    'christoomey/vim-tmux-navigator',
   },
 
---]]
 
+--]]
 }

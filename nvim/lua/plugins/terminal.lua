@@ -40,7 +40,8 @@ return {
     -- Terminal Mode Escape (Caps Lock)
     vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], opts)
 
--- This lets you toggle the terminal OFF even when you are in "typing" mode
-vim.keymap.set('t', '<leader>Tt', '<cmd>ToggleTerm<CR>', opts)
+    -- Toggle the terminal OFF even when in "typing" mode
+    vim.keymap.set('t', '<leader>Tt', '<cmd>ToggleTerm<CR>', 
+        vim.tbl_extend('force', opts, { desc = '[t]oggle (terminal mode)' }))
   end
 }

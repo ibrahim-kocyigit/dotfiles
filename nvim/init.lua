@@ -13,25 +13,26 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Set up plugins
-require('lazy').setup ({
+require('lazy').setup {
 
   spec = {
 
-  require('plugins.colorthemes.onedark'),
-  require('plugins.which-key'),
-  require('plugins.neotree'),
-  require('plugins.terminal'), -- toggleterm
-  --  require('plugins.bufferline'),
-  --  require('plugins.lualine'),
-  -- require('plugins.treesitter'),
-  require('plugins.telescope'),
-  --  require('plugins.lsp'),
-  --  require('plugins.autocompletion'),
-  --  require('plugins.none-ls'),
-  --  require('plugins.gitsigns'),
-  --  require('plugins.alpha'),
-  --  require('plugins.indent-blankline'),
-  --  require('plugins.misc'),
+    require 'plugins.colorthemes.onedark',
+    require 'plugins.which-key',
+    require 'plugins.neotree',
+    require 'plugins.terminal', -- toggleterm
+    require 'plugins.bufferline',
+    require 'plugins.lualine',
+    require 'plugins.treesitter',
+    require 'plugins.telescope',
+    require 'plugins.lsp',
+    require 'plugins.trouble',
+    require 'plugins.autocompletion',
+    require 'plugins.none-ls',
+    require 'plugins.gitsigns',
+    require 'plugins.alpha',
+    require 'plugins.indent-blankline',
+    require 'plugins.misc',
   },
 
   -- To disable Luarocks and clear the warnings
@@ -39,5 +40,4 @@ require('lazy').setup ({
     enabled = false,
     hererocks = false,
   },
-
-})
+}

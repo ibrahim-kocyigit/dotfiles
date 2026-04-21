@@ -2,20 +2,19 @@ return {
   'nvimtools/none-ls.nvim',
   dependencies = {
     'nvimtools/none-ls-extras.nvim',
-    'jayp0521/mason-null-ls.nvim', -- ensure dependencies are installed
+    'jayp0521/mason-null-ls.nvim',
   },
   config = function()
     local null_ls = require 'null-ls'
-    local formatting = null_ls.builtins.formatting -- to setup formatters
-    local diagnostics = null_ls.builtins.diagnostics -- to setup linters
+    local formatting = null_ls.builtins.formatting
+    local diagnostics = null_ls.builtins.diagnostics
 
-    -- Formatters & linters for mason to install
     require('mason-null-ls').setup {
       ensure_installed = {
+        'stylua',    -- Lua formatter (canonical home is here, removed from lsp.lua)
         'shfmt',     -- Shell formatter
-        'checkmake', -- Linter for Makefiles
-        -- 'stylua', -- Lua formatter; already installed via Mason
-        -- 'ruff',   -- Python linter and formatter; already installed via Mason
+        'checkmake', -- Makefile linter
+        'terraform', -- provides terraform fmt
       },
       automatic_installation = true,
     }
@@ -25,13 +24,11 @@ return {
       formatting.stylua,
       formatting.shfmt.with { args = { '-i', '4' } },
       formatting.terraform_fmt,
-      require('none-ls.formatting.ruff').with { extra_args = { '--extend-select', 'I' } },
-      require 'none-ls.formatting.ruff_format',
+      -- ruff removed: handled by ruff LSP server in lsp.lua
     }
 
     local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
     null_ls.setup {
-      -- debug = true, -- Enable debug mode. Inspect logs with :NullLsLog.
       sources = sources,
       on_attach = function(client, bufnr)
         if client:supports_method 'textDocument/formatting' then

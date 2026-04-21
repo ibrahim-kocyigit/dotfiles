@@ -17,7 +17,7 @@ return {
       changedelete = { text = '~' },
     },
     on_attach = function(bufnr)
-      local gs = package.loaded.gitsigns
+      local gs = require 'gitsigns' -- ✅ fixed: was package.loaded.gitsigns
 
       local function map(mode, l, r, opts)
         opts = opts or {}
@@ -25,32 +25,49 @@ return {
         vim.keymap.set(mode, l, r, opts)
       end
 
-      -- Navigation
+      -- Navigation (standard vim diff override — expr pattern is intentional)
       map('n', ']c', function()
-        if vim.wo.diff then return ']c' end
-        vim.schedule(function() gs.next_hunk() end)
+        if vim.wo.diff then
+          return ']c'
+        end
+        vim.schedule(function()
+          gs.next_hunk()
+        end)
         return '<Ignore>'
       end, { expr = true, desc = 'Jump to next hunk' })
 
       map('n', '[c', function()
-        if vim.wo.diff then return '[c' end
-        vim.schedule(function() gs.prev_hunk() end)
+        if vim.wo.diff then
+          return '[c'
+        end
+        vim.schedule(function()
+          gs.prev_hunk()
+        end)
         return '<Ignore>'
       end, { expr = true, desc = 'Jump to previous hunk' })
 
-      -- Actions
-      map('n', '<leader>hs', gs.stage_hunk,                                    { desc = 'Stage hunk' })
-      map('n', '<leader>hr', gs.reset_hunk,                                    { desc = 'Reset hunk' })
-      map('v', '<leader>hs', function() gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = 'Stage hunk' })
-      map('v', '<leader>hr', function() gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = 'Reset hunk' })
-      map('n', '<leader>hS', gs.stage_buffer,                                  { desc = 'Stage buffer' })
-      map('n', '<leader>hR', gs.reset_buffer,                                  { desc = 'Reset buffer' })
-      map('n', '<leader>hp', gs.preview_hunk,                                  { desc = 'Preview hunk' })
-      map('n', '<leader>hb', function() gs.blame_line { full = true } end,     { desc = 'Blame line' })
-      map('n', '<leader>hd', gs.diffthis,                                      { desc = 'Diff this file' })
+      -- [g]it [h]unk actions
+      map('n', '<leader>ghs', gs.stage_hunk, { desc = '[s]tage' })
+      map('n', '<leader>ghr', gs.reset_hunk, { desc = '[r]eset' })
+      map('v', '<leader>ghs', function()
+        gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
+      end, { desc = '[s]tage' })
+      map('v', '<leader>ghr', function()
+        gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
+      end, { desc = '[r]eset' })
+      map('n', '<leader>ghS', gs.stage_buffer, { desc = '[S]tage buffer' })
+      map('n', '<leader>ghR', gs.reset_buffer, { desc = '[R]eset buffer' })
+      map('n', '<leader>ghp', gs.preview_hunk, { desc = '[p]review' })
+      map('n', '<leader>ghd', gs.diffthis, { desc = '[d]iff this' })
 
-      -- Toggles
-      map('n', '<leader>tb', gs.toggle_current_line_blame,                     { desc = 'Toggle line blame' })
+      -- [g]it [b]lame
+      map('n', '<leader>gbl', function()
+        gs.blame_line { full = true }
+      end, { desc = '[l]ine' })
+
+      -- [g]it [t]oggle
+      map('n', '<leader>gtb', gs.toggle_current_line_blame, { desc = '[b]lame' })
     end,
   },
 }
+

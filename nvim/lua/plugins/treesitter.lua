@@ -1,9 +1,7 @@
 return {
   'nvim-treesitter/nvim-treesitter',
-  version = "v0.9.3", 
   build = ':TSUpdate',
   lazy = false,
-  cmd = { 'TSInstall', 'TSUninstall', 'TSUpdate', 'TSUpdateSync', 'TSInstallInfo', 'TSInstallSync' },
   opts = {
     ensure_installed = {
       'lua', 'python', 'vimdoc', 'vim', 'regex', 'terraform', 'sql',
@@ -17,11 +15,25 @@ return {
     },
     indent = { enable = true, disable = { 'ruby' } },
   },
-  -- [u]i [t]oggle [s]yntax
-  init = function()
-    local opts = { noremap = true, silent = true }
-    vim.keymap.set('n', '<leader>uts', '<cmd>TSBufToggle highlight<CR>', 
-        vim.tbl_extend('force', opts, { desc = '[s]yntax' }))
+  config = function(_, opts)
+    require('nvim-treesitter').setup(opts)
+
+    -- Ensure treesitter highlight attaches on every buffer open
+    vim.api.nvim_create_autocmd('FileType', {
+      callback = function()
+        pcall(vim.treesitter.start)
+      end,
+    })
+
+-- CO-LOCATED KEYMAPS (Module-Action-Option)
+local keymap_opts = { noremap = true, silent = true }
+vim.keymap.set('n', '<leader>uts', function()
+  local buf = vim.api.nvim_get_current_buf()
+  if vim.treesitter.highlighter.active[buf] then
+    vim.treesitter.stop(buf)
+  else
+    vim.treesitter.start(buf)
+  end
+end, vim.tbl_extend('force', keymap_opts, { desc = '[s]yntax' }))
   end,
 }
-
