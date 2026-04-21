@@ -3,7 +3,17 @@ return {
   event = "VeryLazy", -- Loads which-key only when needed
   config = function()
     local wk = require("which-key")
-    wk.setup() -- Initializes with default settings
+
+    wk.setup({
+      icons = {
+        breadcrumb = "»", -- character used to separate layers
+        separator = "➜",  -- symbol used between a key and its label
+        group = "+",      -- symbol prepended to a group
+        ---@type false | "mini" | "nvim-web-devicons"
+        -- We explicitly set this to nvim-web-devicons to clear the warning
+        plugin = "nvim-web-devicons", 
+      },
+    })
 
     wk.add({
 
@@ -42,6 +52,13 @@ return {
         { "<leader>u", group = "[u]i" },
         { "<leader>ut", group = "[t]oggle" },
         { "<leader>uc", group = "[c]lear" },
+
+  { "<leader>s", group = "[s]earch" },
+  { "<leader>ss", group = "[s]cope" },
+  { "<leader>sl", group = "[l]sp" },
+  
+  { "<leader>g", group = "[g]it" },
+  { "<leader>gs", group = "[s]earch" },
 
 
   { "<leader>e", group = "[e]xplorer" },

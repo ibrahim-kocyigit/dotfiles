@@ -21,6 +21,16 @@ vim.keymap.set({ 'n', 'v', 'o', 'x', 'i', 'c' }, 'ş', '$', opts)
 vim.keymap.set({ 'n', 'v', 'o', 'x', 'i', 'c' }, 'ö', '/', opts)
 vim.keymap.set({ 'n', 'v', 'o', 'x', 'i', 'c' }, 'ç', '#', opts)
 
+-- EXPRESS LANES (Fast access for high-frequency actions)
+-- Express Save
+vim.keymap.set('n', '<C-s>', '<cmd>update<CR>', opts)
+-- In Insert mode: Save and stay in Insert mode exactly where you are
+vim.keymap.set('i', '<C-s>', '<cmd>update<CR>', opts)
+
+-- Express Quit
+vim.keymap.set('n', '<C-q>', '<cmd>confirm q<CR>', opts)
+-- In Insert mode: Save and quit
+vim.keymap.set('i', '<C-q>', '<Esc><cmd>confirm q<CR>', opts)
 
 ----------------------------------------------------
 -------------------- NAVIGATION --------------------

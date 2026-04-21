@@ -1,16 +1,12 @@
--- Fuzzy Finder (files, lsp, etc)
 return {
   'nvim-telescope/telescope.nvim',
-  -- branch = '0.1.x',
   branch = 'master',
   dependencies = {
     'nvim-lua/plenary.nvim',
     {
       'nvim-telescope/telescope-fzf-native.nvim',
       build = 'make',
-      cond = function()
-        return vim.fn.executable 'make' == 1
-      end,
+      cond = function() return vim.fn.executable 'make' == 1 end,
     },
     'nvim-telescope/telescope-ui-select.nvim',
     'nvim-tree/nvim-web-devicons',
@@ -18,31 +14,21 @@ return {
   config = function()
     local actions = require 'telescope.actions'
     local builtin = require 'telescope.builtin'
+    local opts = { noremap = true, silent = true }
 
     require('telescope').setup {
       defaults = {
-        layout_strategy = 'horizontal',
-        layout_config = {
-          horizontal = {
-            prompt_position = 'bottom',
-            preview_width = 0.6,
-            width = { padding = 0 },
-            height = { padding = 0 },
-          },
-        },
-        path_display = {
-          filename_first = {
-            reverse_directories = true,
-          },
-        },
         mappings = {
           i = {
-            ['<C-ı>'] = actions.move_selection_previous,
-            ['<C-k>'] = actions.move_selection_next,
-            ['<C-l>'] = actions.select_default,
+            ['<C-ı>'] = actions.move_selection_previous, -- Up
+            ['<C-k>'] = actions.move_selection_next,     -- Down
+            ['<C-l>'] = actions.select_default,          -- Open
           },
           n = {
             ['q'] = actions.close,
+            ['ı'] = actions.move_selection_previous,
+            ['k'] = actions.move_selection_next,
+            ['l'] = actions.select_default,
           },
         },
       },
@@ -87,37 +73,22 @@ return {
     pcall(require('telescope').load_extension, 'fzf')
     pcall(require('telescope').load_extension, 'ui-select')
 
-    vim.keymap.set('n', '<leader>sb',       builtin.buffers,      { desc = '[S]earch existing [B]uffers' })
-    vim.keymap.set('n', '<leader><tab>',    builtin.buffers,      { desc = '[S]earch existing [B]uffers' })
-    vim.keymap.set('n', '<leader><leader>', builtin.buffers,      { desc = '[ ] Find existing buffers' })
-    vim.keymap.set('n', '<leader>sm',       builtin.marks,        { desc = '[S]earch [M]arks' })
-    vim.keymap.set('n', '<leader>gf',       builtin.git_files,    { desc = 'Search [G]it [F]iles' })
-    vim.keymap.set('n', '<leader>gc',       builtin.git_commits,  { desc = 'Search [G]it [C]ommits' })
-    vim.keymap.set('n', '<leader>gcf',      builtin.git_bcommits, { desc = 'Search [G]it [C]ommits for current [F]ile' })
-    vim.keymap.set('n', '<leader>gb',       builtin.git_branches, { desc = 'Search [G]it [B]ranches' })
-    vim.keymap.set('n', '<leader>gs',       builtin.git_status,   { desc = 'Search [G]it [S]tatus (diff view)' })
-    vim.keymap.set('n', '<leader>sf',       builtin.find_files,   { desc = '[S]earch [F]iles' })
-    vim.keymap.set('n', '<leader>sh',       builtin.help_tags,    { desc = '[S]earch [H]elp' })
-    vim.keymap.set('n', '<leader>sw',       builtin.grep_string,  { desc = '[S]earch current [W]ord' })
-    vim.keymap.set('n', '<leader>sg',       builtin.live_grep,    { desc = '[S]earch by [G]rep' })
-    vim.keymap.set('n', '<leader>sd',       builtin.diagnostics,  { desc = '[S]earch [D]iagnostics' })
-    vim.keymap.set('n', '<leader>sr',       builtin.resume,       { desc = '[S]earch [R]esume' })
-    vim.keymap.set('n', '<leader>so',       builtin.oldfiles,     { desc = '[S]earch Recent Files' })
-    vim.keymap.set('n', '<leader>sds', function()
-      builtin.lsp_document_symbols {
-        symbols = { 'Class', 'Function', 'Method', 'Constructor', 'Interface', 'Module', 'Property' },
-      }
-    end, { desc = '[S]earch LSP document [S]ymbols' })
-    vim.keymap.set('n', '<leader>s/', function()
-      builtin.live_grep {
-        grep_open_files = true,
-        prompt_title = 'Live Grep in Open Files',
-      }
-    end, { desc = '[S]earch [/] in Open Files' })
-    vim.keymap.set('n', '<leader>/', function()
-      builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-        previewer = false,
-      })
-    end, { desc = '[/] Fuzzily search in current buffer' })
+    -- --- [s]earch Module ---
+    -- [s]earch [s]cope...
+    vim.keymap.set('n', '<leader>ssf', builtin.find_files, vim.tbl_extend('force', opts, { desc = '[f]iles' }))
+    vim.keymap.set('n', '<leader>ssw', builtin.live_grep, vim.tbl_extend('force', opts, { desc = '[w]ords (grep)' }))
+    vim.keymap.set('n', '<leader>ssr', builtin.oldfiles, vim.tbl_extend('force', opts, { desc = '[r]ecent' }))
+    vim.keymap.set('n', '<leader>ssb', builtin.buffers, vim.tbl_extend('force', opts, { desc = '[b]uffers' }))
+    vim.keymap.set('n', '<leader>ssm', builtin.marks, vim.tbl_extend('force', opts, { desc = '[m]arks' }))
+    vim.keymap.set('n', '<leader>ssd', builtin.diagnostics, vim.tbl_extend('force', opts, { desc = '[d]iagnostics' }))
+
+    -- [s]earch [l]sp...
+    vim.keymap.set('n', '<leader>sls', builtin.lsp_document_symbols, vim.tbl_extend('force', opts, { desc = '[s]ymbols' }))
+
+    -- --- [g]it Module ---
+    -- [g]it [s]earch...
+    vim.keymap.set('n', '<leader>gsf', builtin.git_files, vim.tbl_extend('force', opts, { desc = '[f]iles' }))
+    vim.keymap.set('n', '<leader>gsc', builtin.git_commits, vim.tbl_extend('force', opts, { desc = '[c]ommits' }))
+    vim.keymap.set('n', '<leader>gsb', builtin.git_branches, vim.tbl_extend('force', opts, { desc = '[b]ranches' }))
   end,
 }
