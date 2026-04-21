@@ -1,3 +1,5 @@
+working-directory = ~/git
+
 # --- Window and Tabs --- #
 window-width = 80
 window-height = 40
@@ -25,7 +27,7 @@ keybind = opt+ı=goto_split:up
 keybind = opt+l=goto_split:right
 
 mouse-hide-while-typing = true
-macos-option-as-alt = false
+macos-option-as-alt = true
 
 
 
