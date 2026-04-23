@@ -4,11 +4,10 @@
 
 -- Essentials
 vim.g.mapleader = " "
-    local opts = { noremap = true, silent = true }
+local opts = { noremap = true, silent = true }
 vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end, { desc = "source file" })
-vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "escape to normal mode" })
 vim.keymap.set("n", "Q", "<nop>", { desc = "disable Q" })
 
 -- Navigation
