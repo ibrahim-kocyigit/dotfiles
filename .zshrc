@@ -11,7 +11,7 @@ fi
 # ============================================================
 typeset -U path PATH
 export PATH="/opt/homebrew/bin:$PATH"
-
+export PATH="$HOME/.local/bin:$PATH"   # uv tools (pyright, black, ruff, isort)
 
 # ============================================================
 # OH MY ZSH

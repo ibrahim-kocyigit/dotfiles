@@ -1,7 +1,7 @@
 working-directory = ~/git
 
 # --- Window and Tabs --- #
-window-width = 80
+window-width = 100
 window-height = 40
 window-save-state = never
 macos-titlebar-style = tabs
@@ -27,7 +27,7 @@ keybind = opt+ı=goto_split:up
 keybind = opt+l=goto_split:right
 
 mouse-hide-while-typing = true
-macos-option-as-alt = false
+macos-option-as-alt = left
 
 
 
