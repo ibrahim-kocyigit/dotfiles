@@ -1,8 +1,8 @@
-working-directory = ~/git
+working-directory = ~/github
 
 # --- Window and Tabs --- #
-window-width = 140
-window-height = 35
+window-width = 72
+window-height = 36
 window-save-state = never
 macos-titlebar-style = tabs
 # title = " "
