@@ -1,8 +1,8 @@
 working-directory = ~/git
 
 # --- Window and Tabs --- #
-window-width = 100
-window-height = 40
+window-width = 140
+window-height = 35
 window-save-state = never
 macos-titlebar-style = tabs
 # title = " "
@@ -10,7 +10,7 @@ macos-titlebar-style = tabs
 
 # --- Theme & Colors --- #
 theme = Atom One Dark
-background-opacity = 0.95
+background-opacity = 0.96
 background-blur-radius = 25
 # split-divider-color = #ff0000
 
